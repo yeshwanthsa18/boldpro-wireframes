@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bold.pro 2.0 Wireframes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563EB;
+            --primary-dark: #1D4ED8;
+            --secondary: #7C3AED;
+            --success: #059669;
+            --warning: #D97706;
+            --error: #DC2626;
+            --background: #F8FAFC;
+            --text-primary: #1E293B;
+            --text-secondary: #64748B;
+            --white: #FFFFFF;
+            --border-radius: 16px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 84px;
+        }
+
+        .wireframe {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin: 20px 0;
+            padding: 24px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .wireframe:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .wireframe-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .wireframe-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* Navigation */
+        .nav {
+            height: 64px;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            box-shadow: var(--shadow);
+            border-radius: var(--border-radius);
+            margin-bottom: 24px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .nav-item:hover {
+            color: var(--primary);
+        }
+
+        .nav-bottom {
+            height: 72px;
+            background: var(--white);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            box-shadow: var(--shadow);
+            padding: 0 24px;
+        }
+
+        .nav-bottom-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .nav-bottom-item:hover {
+            color: var(--primary);
+        }
+
+        .nav-bottom-item.active {
+            color: var(--primary);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            margin: 16px 0;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 28px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* Grid Layouts */
+        .grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        /* Components */
+        .skill-badge {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-badge:hover {
+            transform: scale(1.05);
+        }
+
+        .skill-badge::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .skill-badge:hover::after {
+            opacity: 1;
+        }
+
+        .chat-bubble {
+            max-width: 80%;
+            padding: 16px 20px;
+            border-radius: 20px;
+            margin: 12px 0;
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-bubble-user {
+            background: var(--primary);
+            color: var(--white);
+            margin-left: auto;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-bubble-bot {
+            background: var(--background);
+            color: var(--text-primary);
+            border-bottom-left-radius: 4px;
+        }
+
+        .job-fit-score {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 700;
+            position: relative;
+            margin: 24px auto;
+        }
+
+        .job-fit-score::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 24px 0;
+        }
+
+        .timeline-event {
+            position: relative;
+            padding-left: 48px;
+            margin-bottom: 24px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .timeline-event:hover {
+            transform: translateX(4px);
+        }
+
+        .timeline-connector {
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary);
+            opacity: 0.5;
+        }
+
+        .timeline-event::before {
+            content: '';
+            position: absolute;
+            left: 16px;
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid var(--white);
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        /* Analytics */
+        .metric-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .metric-value {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 16px 0;
+            position: relative;
+        }
+
+        .metric-value::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+            opacity: 0.2;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--background);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 16px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+            transition: width 1s ease-out;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .wireframe {
+                padding: 16px;
+            }
+
+            .nav {
+                padding: 0 16px;
+            }
+
+            .nav-bottom {
+                padding: 0 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Home Dashboard -->
+        <div class="wireframe">
+            <h2 class="wireframe-title">Home Dashboard</h2>
+            <div class="nav">
+                <div class="nav-item">Bold.pro</div>
+                <div class="nav-item">🔍 Search</div>
+                <div class="nav-item">🔔 Notifications</div>
+                <div class="nav-item">👤 Profile</div>
+            </div>
+            <div class="card">
+                <h3>Welcome back, John!</h3>
+                <div class="job-fit-score">85%</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 85%"></div>
+                </div>
+                <div class="grid grid-2">
+                    <button class="btn btn-primary">📝 Update Profile</button>
+                    <button class="btn btn-secondary">💬 Start Chat</button>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Activity Feed</h3>
+                <div class="timeline">
+                    <div class="timeline-event">
+                        <div class="timeline-connector"></div>
+                        <h4>New Endorsement</h4>
+                        <p>Sarah endorsed your React skills</p>
+                    </div>
+                    <div class="timeline-event">
+                        <div class="timeline-connector"></div>
+                        <h4>Project Update</h4>
+                        <p>AI Career Coach project is 75% complete</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BoldBot Chat -->
+        <div class="wireframe">
+            <h2 class="wireframe-title">BoldBot Chat</h2>
+            <div class="nav">
+                <div class="nav-item">← Back</div>
+                <div class="nav-item">🤖 BoldBot</div>
+                <div class="nav-item">⚙️ Settings</div>
+            </div>
+            <div class="chat-bubble chat-bubble-bot">
+                Hi! I'm your AI career companion. How can I help you today?
+            </div>
+            <div class="chat-bubble chat-bubble-user">
+                I want to improve my resume for a Product Manager role
+            </div>
+            <div class="chat-bubble chat-bubble-bot">
+                I'll analyze your profile and the job requirements. Here's what I found...
+            </div>
+            <div class="grid grid-3">
+                <button class="btn btn-secondary">📄 Resume Review</button>
+                <button class="btn btn-secondary">🎯 Job Match</button>
+                <button class="btn btn-secondary">📊 Skill Gap</button>
+            </div>
+        </div>
+
+        <!-- Skill Passport -->
+        <div class="wireframe">
+            <h2 class="wireframe-title">Skill Passport</h2>
+            <div class="nav">
+                <div class="nav-item">← Back</div>
+                <div class="nav-item">🎯 Skills</div>
+                <div class="nav-item">➕ Add</div>
+            </div>
+            <div class="grid grid-3">
+                <div class="skill-badge">React</div>
+                <div class="skill-badge">Node.js</div>
+                <div class="skill-badge">Python</div>
+                <div class="skill-badge">AWS</div>
+                <div class="skill-badge">Docker</div>
+                <div class="skill-badge">+Add</div>
+            </div>
+            <div class="card">
+                <h3>Skill Gap Analysis</h3>
+                <p>High demand: Machine Learning, Cloud Architecture</p>
+                <button class="btn btn-primary">📚 View Learning Path</button>
+            </div>
+        </div>
+
+        <!-- Analytics Dashboard -->
+        <div class="wireframe">
+            <h2 class="wireframe-title">Analytics Dashboard</h2>
+            <div class="nav">
+                <div class="nav-item">← Back</div>
+                <div class="nav-item">📊 Analytics</div>
+                <div class="nav-item">📥 Export</div>
+            </div>
+            <div class="grid grid-2">
+                <div class="metric-card">
+                    <h3>Profile Views</h3>
+                    <div class="metric-value">1,234</div>
+                    <p>+15% this week</p>
+                </div>
+                <div class="metric-card">
+                    <h3>Job Matches</h3>
+                    <div class="metric-value">85%</div>
+                    <p>12 new matches</p>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Recent Activity</h3>
+                <ul>
+                    <li>5 new profile views</li>
+                    <li>2 skill endorsements</li>
+                    <li>1 project invitation</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="nav-bottom">
+            <div class="nav-bottom-item active">
+                <span>🏠</span>
+                <span>Home</span>
+            </div>
+            <div class="nav-bottom-item">
+                <span>📅</span>
+                <span>Timeline</span>
+            </div>
+            <div class="nav-bottom-item">
+                <span>🤖</span>
+                <span>BoldBot</span>
+            </div>
+            <div class="nav-bottom-item">
+                <span>👥</span>
+                <span>Projects</span>
+            </div>
+            <div class="nav-bottom-item">
+                <span>👤</span>
+                <span>Profile</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add hover effects and animations
+        document.querySelectorAll('.skill-badge').forEach(badge => {
+            badge.addEventListener('click', () => {
+                badge.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    badge.style.transform = 'scale(1)';
+                }, 200);
+            });
+        });
+
+        // Animate progress bars on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.width = entry.target.getAttribute('data-progress') + '%';
+                }
+            });
+        });
+
+        document.querySelectorAll('.progress-fill').forEach(progress => {
+            progress.style.width = '0';
+            progress.setAttribute('data-progress', '85');
+            observer.observe(progress);
+        });
+
+        // Add typing animation to chat bubbles
+        const chatBubbles = document.querySelectorAll('.chat-bubble');
+        chatBubbles.forEach((bubble, index) => {
+            bubble.style.opacity = '0';
+            setTimeout(() => {
+                bubble.style.opacity = '1';
+            }, index * 500);
+        });
+
+        // Add active state to bottom navigation
+        document.querySelectorAll('.nav-bottom-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.nav-bottom-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html> 
